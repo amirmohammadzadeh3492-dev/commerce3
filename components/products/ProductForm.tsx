@@ -8,12 +8,14 @@ export default function ProductForm() {
   const [price, setPrice] = useState("");
 
   const handleSubmit = async () => {
+    console.log("CLICKED");
+
     await createProduct({
       title,
       price: Number(price),
     });
 
-    alert("محصول ساخته شد");
+    alert("محصول ثبت شد");
   };
 
   return (
@@ -31,7 +33,7 @@ export default function ProductForm() {
       />
 
       <button onClick={handleSubmit}>
-        ایجاد محصول
+        ثبت محصول
       </button>
     </div>
   );
