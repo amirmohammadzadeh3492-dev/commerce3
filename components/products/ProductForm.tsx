@@ -6,14 +6,9 @@ import { createProduct } from "@/services/product/createProduct";
 export default function ProductForm() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
-    if (!title || !price) return alert("فیلدها خالی است");
-
     try {
-      setLoading(true);
-
       console.log("CLICKED");
 
       await createProduct({
@@ -22,19 +17,14 @@ export default function ProductForm() {
       });
 
       alert("محصول ثبت شد");
-
-      setTitle("");
-      setPrice("");
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.error(err);
       alert("خطا در ثبت محصول");
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 300 }}>
       <input
         placeholder="title"
         value={title}
@@ -47,8 +37,8 @@ export default function ProductForm() {
         onChange={(e) => setPrice(e.target.value)}
       />
 
-      <button onClick={handleSubmit} disabled={loading}>
-        {loading ? "در حال ثبت..." : "ثبت محصول"}
+      <button onClick={handleSubmit}>
+        ثبت محصول
       </button>
     </div>
   );
