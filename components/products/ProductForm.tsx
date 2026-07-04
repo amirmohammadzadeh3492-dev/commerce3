@@ -8,8 +8,6 @@ export default function ProductForm() {
   const [price, setPrice] = useState("");
 
   const handleSubmit = async () => {
-    console.log("CLICKED");
-
     await createProduct({
       title,
       price: Number(price),
@@ -21,15 +19,15 @@ export default function ProductForm() {
   return (
     <div>
       <input
-        placeholder="title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        placeholder="title"
       />
 
       <input
-        placeholder="price"
         value={price}
         onChange={(e) => setPrice(e.target.value)}
+        placeholder="price"
       />
 
       <button onClick={handleSubmit}>
