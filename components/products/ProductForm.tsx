@@ -6,32 +6,49 @@ import { createProduct } from "@/services/product/createProduct";
 export default function ProductForm() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
-    await createProduct({
-      title,
-      price: Number(price),
-    });
+    if (!title || !price) return alert("فیلدها خالی است");
 
-    alert("محصول ثبت شد");
+    try {
+      setLoading(true);
+
+      console.log("CLICKED");
+
+      await createProduct({
+        title,
+        price: Number(price),
+      });
+
+      alert("محصول ثبت شد");
+
+      setTitle("");
+      setPrice("");
+    } catch (e) {
+      console.error(e);
+      alert("خطا در ثبت محصول");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div>
       <input
+        placeholder="title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="title"
       />
 
       <input
+        placeholder="price"
         value={price}
         onChange={(e) => setPrice(e.target.value)}
-        placeholder="price"
       />
 
-      <button onClick={handleSubmit}>
-        ثبت محصول
+      <button onClick={handleSubmit} disabled={loading}>
+        {loading ? "در حال ثبت..." : "ثبت محصول"}
       </button>
     </div>
   );
