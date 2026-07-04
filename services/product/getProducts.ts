@@ -1,11 +1,9 @@
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { turso } from "@/lib/turso";
 
 export async function getProducts() {
-  const snap = await getDocs(collection(db, "products"));
+  const result = await turso.execute(
+    "SELECT * FROM products ORDER BY created_at DESC"
+  );
 
-  return snap.docs.map((d) => ({
-    id: d.id,
-    ...d.data(),
-  }));
+  return result.rows;
 }
