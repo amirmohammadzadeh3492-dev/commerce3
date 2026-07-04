@@ -2,5 +2,5 @@ import { createClient } from "@libsql/client";
 
 export const turso = createClient({
   url:libsql://commerce-db-amirmohammadzadeh3492-dev.aws-eu-west-1.turso.io,
-  authToken: process.env.TURSO_AUTH_TOKEN!,
+  authToken:eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3ODMxNTc5MTUsImlkIjoiMDE5ZjJjNzktYTUwMS03NTZkLWE3ODktN2RkMGFhOGUwMDI3Iiwia2lkIjoieVd6WFV5dU1hazVlRkhoSWp0RW9EbjlicEE1d0VuQ055N0E2V3UwX00wOCIsInJpZCI6IjY1MjkyNzJiLWRiMWMtNGMyZS04ZTVjLTI5MDRkNWYyNTI4YSJ9.hmjkyadAC_ejlI31MOCJbAM1wbopGY7PPTQ9vpUumMvBiKWbIz4Ebt4KRuopkL4VXNGEQgBf4rGIzYBpgMFpDA,
 });
