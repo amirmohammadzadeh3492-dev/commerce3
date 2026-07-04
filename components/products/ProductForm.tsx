@@ -8,6 +8,8 @@ export default function ProductForm() {
   const [price, setPrice] = useState("");
 
   async function handleSubmit() {
+    console.log("CLICKED");
+
     await createProduct({
       title,
       price: Number(price),
@@ -17,7 +19,7 @@ export default function ProductForm() {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+    <div>
       <input
         placeholder="title"
         value={title}
