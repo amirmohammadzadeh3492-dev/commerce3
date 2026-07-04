@@ -7,24 +7,17 @@ export default function ProductForm() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
 
-  const handleSubmit = async () => {
-    try {
-      console.log("CLICKED");
+  async function handleSubmit() {
+    await createProduct({
+      title,
+      price: Number(price),
+    });
 
-      await createProduct({
-        title,
-        price: Number(price),
-      });
-
-      alert("محصول ثبت شد");
-    } catch (err) {
-      console.error(err);
-      alert("خطا در ثبت محصول");
-    }
-  };
+    alert("محصول ثبت شد");
+  }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 300 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
       <input
         placeholder="title"
         value={title}
