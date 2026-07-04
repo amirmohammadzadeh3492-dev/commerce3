@@ -1,17 +1,40 @@
-const handleSubmit = async () => {
-  console.log("CLICKED");
+"use client";
 
-  try {
-    const res = await createProduct({
+import { useState } from "react";
+import { createProduct } from "@/services/product/createProduct";
+
+export default function ProductForm() {
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+
+  const handleSubmit = async () => {
+    console.log("CLICKED");
+
+    await createProduct({
       title,
       price: Number(price),
     });
 
-    console.log("SUCCESS:", res);
+    alert("محصول ثبت شد");
+  };
 
-    alert("OK SAVED");
-  } catch (e) {
-    console.error("FORM ERROR:", e);
-    alert("FAILED");
-  }
-};
+  return (
+    <div>
+      <input
+        placeholder="title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+
+      <input
+        placeholder="price"
+        value={price}
+        onChange={(e) => setPrice(e.target.value)}
+      />
+
+      <button onClick={handleSubmit}>
+        ثبت محصول
+      </button>
+    </div>
+  );
+}
