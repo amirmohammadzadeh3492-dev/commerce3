@@ -1,29 +1,17 @@
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { turso } from "@/lib/turso";
 
 export async function createProduct(data: {
   title: string;
   price: number;
 }) {
-  console.log("🔥 START CREATE PRODUCT");
+  const id = crypto.randomUUID();
 
-  try {
-    console.log("🔥 DATA:", data);
+  console.log("🔥 INSERT:", data);
 
-    const ref = await addDoc(collection(db, "products"), {
-      title: data.title,
-      price: data.price,
-      createdAt: serverTimestamp(),
-    });
+  await turso.execute({
+    sql: "INSERT INTO products (id, title, price) VALUES (?, ?, ?)",
+    args: [id, data.title, data.price],
+  });
 
-    console.log("✅ SUCCESS ID:", ref.id);
-
-    return ref.id;
-  } catch (error: any) {
-    console.error("❌ FIREBASE ERROR FULL:", error);
-    console.error("❌ ERROR CODE:", error?.code);
-    console.error("❌ ERROR MESSAGE:", error?.message);
-  }
-
-  console.log("🔥 END CREATE PRODUCT");
+  return id;
 }
